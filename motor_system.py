@@ -67,7 +67,19 @@ def cleanup():
     GPIO.cleanup()
 
 atexit.register(cleanup) #ensure the cleanup runs when the system exits.
+
+def move_forward(speed=50):
+    init_motor_pins()
+    print(f"COMMAND: Moving forward at{speed}% speed.")
     
+    GPIO.output(RIGHT_IN1, GPIO.HIGH)
+    GPIO.output(RIGHT_IN2, GPIO.LOW)
+    GPIO.output(LEFT_IN3, GPIO.HIGH)
+    GPIO.output(LEFT_IN4, GPIO.LOW)   
+    
+    pwm_right.ChangeDutyCycle(speed)
+    pwm_left.ChangeDutyCycle(speed)
+
 
 
         
