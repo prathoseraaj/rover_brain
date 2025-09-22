@@ -19,6 +19,20 @@ except:
             state = "HIGH" if value == self.HIGH else "LOW"
             print(f"MOCK: Pin {pin} set to {state}.")
         
+        def PWM(self, pin, freq):
+            print(f"MOCK: PWM on Pin {pin} started with frequency {freq}Hz.")
+            class MockPWM:
+                def start(self, dc): 
+                    print(f"MOCK: PWM started at {dc}% duty cycle.")
+                def ChangeDutyCycle(self, dc): 
+                    print(f"MOCK: Speed changed to {dc}%.")
+                def stop(self):
+                    pass 
+            return MockPWM()
+        
+        def cleanup(self):
+            print("--- MOCK: GPIO Cleanup complete. ---")
+            
         
             
         
