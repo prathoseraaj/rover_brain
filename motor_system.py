@@ -41,6 +41,29 @@ LEFT_IN3 = 23
 LEFT_IN4 = 24
 LEFT_EN = 25 #EN pin is used to get the PWM(pulse width modulation)'s output
 
+pwm_right = None
+pwm_left  = None
+
+def init_motor_pins():
+    global pwm_right, pwm_left
+    
+    if pwm_right is not None:
+        return
+    
+    GPIO.setmode(GPIO.BCM)
+    
+    GPIO.setup([RIGHT_IN1, RIGHT_IN2, RIGHT_EN, LEFT_IN3, LEFT_IN4, LEFT_EN], GPIO.OUT)
+    
+    # Creates PWM objects on the enable pins at 100 Hz frequency.
+    pwm_right = GPIO.PWM(RIGHT_EN, 100) 
+    pwm_left = GPIO.PWM(LEFT_EN, 100)
+    
+    pwm_right.start(0)
+    pwm_left.start(0)
+    
+    
+    
+
 
         
             
