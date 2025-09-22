@@ -5,9 +5,9 @@ try:
     import RPi.GPIO as GPIO
     print("STATUS: Running on REAL Raspberry Pi Hardware.")
 except:
-     print("WARNING: RPi.GPIO not found. Using MOCK mode for simulation.")
+    print("WARNING: RPi.GPIO not found. Using MOCK mode for simulation.")
      
-     class MockGPIO:
+    class MockGPIO:
          
         HIGH, LOW, OUT, BCM = 1, 0, 1, 1
          
@@ -15,7 +15,7 @@ except:
             print("MOCK: GPIO mode set")
         def setup(self, pin, mode): 
             print(f"MOCK: Pin {pin} set up as OUTPUT.")
-        def output(self,pin,mode):
+        def output(self,pin,value):
             state = "HIGH" if value == self.HIGH else "LOW"
             print(f"MOCK: Pin {pin} set to {state}.")
         
@@ -33,6 +33,11 @@ except:
         def cleanup(self):
             print("--- MOCK: GPIO Cleanup complete. ---")
             
+    import sys
+    sys.modules['RPi'] = MockGPIO()
+    sys.modules['RPi.GPIO'] = MockGPIO()
+    GPIO = MockGPIO()
+
 RIGHT_IN1 = 17
 RIGHT_IN2 = 27
 RIGHT_EN = 22
@@ -62,6 +67,7 @@ def init_motor_pins():
     pwm_left.start(0)
     
 def cleanup():
+    global pwm_right, pwm_left
     if pwm_right: pwm_right.stop()
     if pwm_left: pwm_left.stop()
     GPIO.cleanup()
@@ -129,5 +135,3 @@ def stop_rover_motion(speed=50):
     if pwm_left:
         pwm_left.ChangeDutyCycle(0)
 
-
-    
