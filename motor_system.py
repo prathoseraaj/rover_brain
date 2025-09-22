@@ -61,7 +61,12 @@ def init_motor_pins():
     pwm_right.start(0)
     pwm_left.start(0)
     
-    
+def cleanup():
+    if pwm_right: pwm_right.stop()
+    if pwm_left: pwm_left.stop()
+    GPIO.cleanup()
+
+atexit.register(cleanup) #ensure the cleanup runs when the system exits.
     
 
 
