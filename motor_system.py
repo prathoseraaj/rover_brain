@@ -117,3 +117,17 @@ def turn_right(speed=50):
     
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
+    
+def stop_rover_motion(speed=50):
+    print("COMMAND: HALTING MOTION")
+    
+    GPIO.output([RIGHT_IN1, RIGHT_IN2, LEFT_IN3, LEFT_IN4], GPIO.LOW)
+    
+    global pwm_right,pwm_left
+    if pwm_right:
+        pwm_right.ChangeDutyCycle(0)
+    if pwm_left:
+        pwm_left.ChangeDutyCycle(0)
+
+
+    
