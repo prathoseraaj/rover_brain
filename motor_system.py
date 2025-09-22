@@ -33,6 +33,15 @@ except:
         def cleanup(self):
             print("--- MOCK: GPIO Cleanup complete. ---")
             
+RIGHT_IN1 = 17
+RIGHT_IN2 = 27
+RIGHT_EN = 22
+
+LEFT_IN3 = 23
+LEFT_IN4 = 24
+LEFT_EN = 25 
+
+
         
             
         
