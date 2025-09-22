@@ -135,3 +135,11 @@ def stop_rover_motion(speed=50):
     if pwm_left:
         pwm_left.ChangeDutyCycle(0)
 
+if __name__ == "__main__":
+    print("---- Running Local Test ----")
+    move_forward(70)
+    time.sleep(1)
+    turn_left(40)
+    time.sleep(1)
+    stop_rover_motion()
+    time.sleep(1)
