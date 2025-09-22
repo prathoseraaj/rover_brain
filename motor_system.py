@@ -80,6 +80,18 @@ def move_forward(speed=50):
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
 
+def move_backward(speed=50):
+    init_motor_pins()
+    print(f"COMMAND: Moving backward at{speed}% speed.")
+    
+    GPIO.output(RIGHT_IN1, GPIO.LOW)
+    GPIO.output(RIGHT_IN2, GPIO.HIGH)
+    GPIO.output(LEFT_IN3, GPIO.LOW)
+    GPIO.output(LEFT_IN4, GPIO.HIGH)
+    
+    pwm_right.ChangeDutyCycle(speed)
+    pwm_left.ChangeDutyCycle(speed)
+
 
 
         
