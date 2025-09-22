@@ -39,7 +39,7 @@ RIGHT_EN = 22
 
 LEFT_IN3 = 23
 LEFT_IN4 = 24
-LEFT_EN = 25 
+LEFT_EN = 25 #EN pin is used to get the PWM(pulse width modulation)'s output
 
 
         
