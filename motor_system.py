@@ -104,11 +104,16 @@ def turn_left(speed=50):
     
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
-    
-    
-    
-    
 
-        
-            
-        
+def turn_right(speed=50):
+    init_motor_pins()
+    
+    print(f"COMMAND: Moving turns right at{speed}% speed.")
+    
+    GPIO.output(RIGHT_IN1, GPIO.LOW)
+    GPIO.output(RIGHT_IN2, GPIO.HIGH)
+    GPIO.output(LEFT_IN3, GPIO.HIGH)
+    GPIO.output(LEFT_IN4, GPIO.LOW)
+    
+    pwm_right.ChangeDutyCycle(speed)
+    pwm_left.ChangeDutyCycle(speed)
