@@ -1,4 +1,7 @@
 from flask import Flask, render_template_string
+from motor_system import (
+    move_forward, turn_left, turn_right, stop_rover_motion
+)
 
 app = Flask(__name__)
 
