@@ -38,7 +38,7 @@ This project provides a complete solution for controlling a Raspberry Pi-based r
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/prathoseraaj/rover_brain.git
    cd rover_brain
    ```
 
@@ -96,9 +96,9 @@ This runs a test sequence with forward movement, left turn, and stop.
 
 ```
 rover_brain/
-├── main.py           # Flask web server and routes
-├── motor_system.py   # Motor control and GPIO management
-└── README.md         # This file
+├── main.py           
+├── motor_system.py   
+└── README.md         
 ```
 
 ## API Endpoints
