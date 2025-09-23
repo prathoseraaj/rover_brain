@@ -1,7 +1,8 @@
 from flask import Flask, render_template_string
 from motor_system import (
-    move_forward, turn_left, turn_right, stop_rover_motion
+    move_forward, move_backward, turn_left, turn_right, stop_rover_motion
 )
+import time
 
 app = Flask(__name__)
 
@@ -60,10 +61,37 @@ TPL = """
 </html>
 """
 
-@app.get("/")
+@app.route("/")
 def root():
     print("Running sucessfully!")
-    return "Running Sucessfully!"
+    return render_template_string(TPL, message="Ready. Start testing your logic!")
+
+@app.route("/cmd/<action>")
+def command_action(action):
+    response_message = f"Unknown Command: {action}"
+
+    if action == "forward":
+        move_forward(speed=60)
+        response_message = 'Moving Forward'
+    
+    elif action == "backward":
+        move_backward(speed=60)
+        response_message = 'Moving Backwrad'
+    
+    elif action == "right":
+        turn_right(speed=60)
+        response_message = 'Turning Right'
+    
+    elif action == "left":
+        turn_left(speed=60)
+        response_message= 'Turning Left'
+
+    elif action == "Stop":
+        response_message = 'Stop the Motion'
+
+    time.sleep(0.1)
+
+    return render_template_string(TPL, message=response_message)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
