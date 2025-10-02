@@ -87,6 +87,7 @@ def command_action(action):
         response_message= 'Turning Left'
 
     elif action == "stop":
+        stop_rover_motion()
         response_message = 'Stop the Motion'
 
     time.sleep(0.1)
