@@ -86,7 +86,7 @@ def command_action(action):
         turn_left(speed=60)
         response_message= 'Turning Left'
 
-    elif action == "Stop":
+    elif action == "stop":
         response_message = 'Stop the Motion'
 
     time.sleep(0.1)
