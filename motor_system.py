@@ -78,8 +78,10 @@ def move_forward(speed=50):
     init_motor_pins()
     print(f"COMMAND: Moving forward at{speed}% speed.")
     
+    # Right motors FORWARD
     GPIO.output(RIGHT_IN1, GPIO.HIGH)
     GPIO.output(RIGHT_IN2, GPIO.LOW)
+    # Left motors FORWARD
     GPIO.output(LEFT_IN3, GPIO.HIGH)
     GPIO.output(LEFT_IN4, GPIO.LOW)   
     
@@ -90,8 +92,10 @@ def move_backward(speed=50):
     init_motor_pins()
     print(f"COMMAND: Moving backward at{speed}% speed.")
     
+    # Right motors BACKWARD
     GPIO.output(RIGHT_IN1, GPIO.LOW)
     GPIO.output(RIGHT_IN2, GPIO.HIGH)
+    # Left motors BACKWARD
     GPIO.output(LEFT_IN3, GPIO.LOW)
     GPIO.output(LEFT_IN4, GPIO.HIGH)
     
@@ -101,10 +105,16 @@ def move_backward(speed=50):
 def turn_left(speed=50):
     init_motor_pins()
     
-    print(f"COMMAND: Moving turns left at{speed}% speed.")
+    print(f"COMMAND: Executing Pivot Turn Left at {speed}% speed.")
     
+    # Action: Right Motors FORWARD, Left Motors BACKWARD
+    
+    # Right motors FORWARD (Pushing the rover left)
     GPIO.output(RIGHT_IN1, GPIO.HIGH)
     GPIO.output(RIGHT_IN2, GPIO.LOW)
+    
+    # Left motors BACKWARD (Pulling the rover left)
+    # If the turn struggles, try flipping these two pins for the Left Motor (IN3/IN4)
     GPIO.output(LEFT_IN3, GPIO.LOW)
     GPIO.output(LEFT_IN4, GPIO.HIGH)
     
@@ -114,10 +124,16 @@ def turn_left(speed=50):
 def turn_right(speed=50):
     init_motor_pins()
     
-    print(f"COMMAND: Moving turns right at{speed}% speed.")
+    print(f"COMMAND: Executing Pivot Turn Right at {speed}% speed.")
     
+    # Action: Right Motors BACKWARD, Left Motors FORWARD
+
+    # Right motors BACKWARD (Pulling the rover right)
+    # If the turn struggles, try flipping these two pins for the Right Motor (IN1/IN2)
     GPIO.output(RIGHT_IN1, GPIO.LOW)
     GPIO.output(RIGHT_IN2, GPIO.HIGH)
+    
+    # Left motors FORWARD (Pushing the rover right)
     GPIO.output(LEFT_IN3, GPIO.HIGH)
     GPIO.output(LEFT_IN4, GPIO.LOW)
     
