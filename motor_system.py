@@ -74,8 +74,8 @@ def cleanup():
 
 atexit.register(cleanup) #ensure the cleanup runs when the system exits.
 
-# INCREASED DEFAULT SPEED TO 75% for better starting torque
-def move_forward(speed=75):
+# MAXIMIZED DEFAULT SPEED TO 100% to test power limits
+def move_forward(speed=100):
     init_motor_pins()
     print(f"COMMAND: Moving forward at{speed}% speed.")
     
@@ -89,8 +89,8 @@ def move_forward(speed=75):
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
 
-# INCREASED DEFAULT SPEED TO 75%
-def move_backward(speed=75):
+# MAXIMIZED DEFAULT SPEED TO 100%
+def move_backward(speed=100):
     init_motor_pins()
     print(f"COMMAND: Moving backward at{speed}% speed.")
     
@@ -104,14 +104,13 @@ def move_backward(speed=75):
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
 
-# INCREASED DEFAULT SPEED TO 75% AND ADJUSTED RIGHT MOTOR DIRECTION FOR PIVOT
-def turn_left(speed=75):
+# MAXIMIZED DEFAULT SPEED TO 100%
+def turn_left(speed=100):
     init_motor_pins()
     
     print(f"COMMAND: Executing Pivot Turn Left at {speed}% speed.")
     
     # Action: Right Motors BACKWARD, Left Motors FORWARD
-    # We flip the turning logic here to correct for potential wiring polarity issues.
     
     # Right motors BACKWARD (Pulling the rover left for a tight pivot)
     GPIO.output(RIGHT_IN1, GPIO.LOW)
@@ -124,14 +123,13 @@ def turn_left(speed=75):
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
 
-# INCREASED DEFAULT SPEED TO 75% AND ADJUSTED RIGHT MOTOR DIRECTION FOR PIVOT
-def turn_right(speed=75):
+# MAXIMIZED DEFAULT SPEED TO 100%
+def turn_right(speed=100):
     init_motor_pins()
     
     print(f"COMMAND: Executing Pivot Turn Right at {speed}% speed.")
     
     # Action: Right Motors FORWARD, Left Motors BACKWARD
-    # We flip the turning logic here to correct for potential wiring polarity issues.
 
     # Right motors FORWARD (Pushing the rover right for a tight pivot)
     GPIO.output(RIGHT_IN1, GPIO.HIGH)
