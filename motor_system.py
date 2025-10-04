@@ -74,7 +74,8 @@ def cleanup():
 
 atexit.register(cleanup) #ensure the cleanup runs when the system exits.
 
-def move_forward(speed=50):
+# INCREASED DEFAULT SPEED TO 75% for better starting torque
+def move_forward(speed=75):
     init_motor_pins()
     print(f"COMMAND: Moving forward at{speed}% speed.")
     
@@ -88,7 +89,8 @@ def move_forward(speed=50):
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
 
-def move_backward(speed=50):
+# INCREASED DEFAULT SPEED TO 75%
+def move_backward(speed=75):
     init_motor_pins()
     print(f"COMMAND: Moving backward at{speed}% speed.")
     
@@ -102,40 +104,42 @@ def move_backward(speed=50):
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
 
-def turn_left(speed=50):
+# INCREASED DEFAULT SPEED TO 75% AND ADJUSTED RIGHT MOTOR DIRECTION FOR PIVOT
+def turn_left(speed=75):
     init_motor_pins()
     
     print(f"COMMAND: Executing Pivot Turn Left at {speed}% speed.")
     
-    # Action: Right Motors FORWARD, Left Motors BACKWARD
+    # Action: Right Motors BACKWARD, Left Motors FORWARD
+    # We flip the turning logic here to correct for potential wiring polarity issues.
     
-    # Right motors FORWARD (Pushing the rover left)
-    GPIO.output(RIGHT_IN1, GPIO.HIGH)
-    GPIO.output(RIGHT_IN2, GPIO.LOW)
+    # Right motors BACKWARD (Pulling the rover left for a tight pivot)
+    GPIO.output(RIGHT_IN1, GPIO.LOW)
+    GPIO.output(RIGHT_IN2, GPIO.HIGH)
     
-    # Left motors BACKWARD (Pulling the rover left)
-    # If the turn struggles, try flipping these two pins for the Left Motor (IN3/IN4)
-    GPIO.output(LEFT_IN3, GPIO.LOW)
-    GPIO.output(LEFT_IN4, GPIO.HIGH)
+    # Left motors FORWARD (Pushing the rover left for a tight pivot)
+    GPIO.output(LEFT_IN3, GPIO.HIGH)
+    GPIO.output(LEFT_IN4, GPIO.LOW)
     
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
 
-def turn_right(speed=50):
+# INCREASED DEFAULT SPEED TO 75% AND ADJUSTED RIGHT MOTOR DIRECTION FOR PIVOT
+def turn_right(speed=75):
     init_motor_pins()
     
     print(f"COMMAND: Executing Pivot Turn Right at {speed}% speed.")
     
-    # Action: Right Motors BACKWARD, Left Motors FORWARD
+    # Action: Right Motors FORWARD, Left Motors BACKWARD
+    # We flip the turning logic here to correct for potential wiring polarity issues.
 
-    # Right motors BACKWARD (Pulling the rover right)
-    # If the turn struggles, try flipping these two pins for the Right Motor (IN1/IN2)
-    GPIO.output(RIGHT_IN1, GPIO.LOW)
-    GPIO.output(RIGHT_IN2, GPIO.HIGH)
+    # Right motors FORWARD (Pushing the rover right for a tight pivot)
+    GPIO.output(RIGHT_IN1, GPIO.HIGH)
+    GPIO.output(RIGHT_IN2, GPIO.LOW)
     
-    # Left motors FORWARD (Pushing the rover right)
-    GPIO.output(LEFT_IN3, GPIO.HIGH)
-    GPIO.output(LEFT_IN4, GPIO.LOW)
+    # Left motors BACKWARD (Pulling the rover right for a tight pivot)
+    GPIO.output(LEFT_IN3, GPIO.LOW)
+    GPIO.output(LEFT_IN4, GPIO.HIGH)
     
     pwm_right.ChangeDutyCycle(speed)
     pwm_left.ChangeDutyCycle(speed)
